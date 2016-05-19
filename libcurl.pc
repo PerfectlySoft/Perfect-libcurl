@@ -1,5 +1,4 @@
-Name: PerfectLib
-Description: Perfect support library
-Version: 0.13.0
+Name: cURL
+Description: Perfect cURL support library
+Version: 0.2.0
 Libs: -lcurl
-Cflags: break
