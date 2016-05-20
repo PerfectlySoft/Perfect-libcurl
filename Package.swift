@@ -21,5 +21,5 @@ import PackageDescription
 
 let package = Package(
 	name: "cURL",
-	pkgConfig: "libcurl.pc"
+	pkgConfig: "libcurl"
 )
