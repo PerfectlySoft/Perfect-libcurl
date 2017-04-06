@@ -74,7 +74,7 @@ extern inline CURLcode curl_get_msg_result(CURLMsg * msg)
 	return msg->data.result;
 }
 
-extern inline CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem, struc curl_httppost **lastitem,
+extern inline CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
 	const char * name, const char * content, const long size, const char * type) {
 		return type ?
 			( size > 0 ? curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
@@ -92,14 +92,17 @@ extern inline CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem
 		;
 }
 
-extern inline CURLFORMcode curl_formadd_file(struct curl_httppost **firstitem, struc curl_httppost **lastitem,
-	const char * name, const char * path, const * type) {
+extern inline CURLFORMcode curl_formadd_file(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
+	const char * name, const char * path, const char * type) {
 		return type ? curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-						CURLFORM_CONTENTTYPE, type, CURLFORM_FILE, path, CURLFORM_END) : 
+						CURLFORM_CONTENTTYPE, type, CURLFORM_FILE, path, CURLFORM_END) :
 						curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
 						CURLFORM_FILE, path, CURLFORM_END);
 }
 
+extern inline CURLcode curl_form_post(CURL * handle, struct curl_httppost * post) {
+	return curl_easy_setopt(handle, CURLOPT_HTTPPOST, post);
+}
 
 
 #endif
