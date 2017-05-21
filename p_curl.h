@@ -77,27 +77,33 @@ extern inline CURLcode curl_get_msg_result(CURLMsg * msg)
 extern inline CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
 	const char * name, const char * content, const long size, const char * type) {
 		return type ?
-			( size > 0 ? curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-							CURLFORM_PTRCONTENTS, content, CURLFORM_CONTENTSLENGTH, size,
-							CURLFORM_CONTENTTYPE, type, CURLFORM_END)
-				: curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-								CURLFORM_PTRCONTENTS, content,
-								CURLFORM_CONTENTTYPE, type, CURLFORM_END)
-			) :
-			( size > 0 ? curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-							CURLFORM_PTRCONTENTS, content, CURLFORM_CONTENTSLENGTH, size, CURLFORM_END)
-				:		curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-								CURLFORM_COPYCONTENTS, content, CURLFORM_END)
-			) ;
-		;
+			curl_formadd(firstitem, lastitem,
+							CURLFORM_COPYNAME, name,
+							CURLFORM_COPYCONTENTS, content,
+							CURLFORM_CONTENTSLENGTH, size,
+							CURLFORM_CONTENTTYPE, type,
+							CURLFORM_END)
+			 :
+			curl_formadd(firstitem, lastitem,
+							CURLFORM_COPYNAME, name,
+							CURLFORM_COPYCONTENTS, content,
+							CURLFORM_CONTENTSLENGTH, size,
+							CURLFORM_END);
 }
 
 extern inline CURLFORMcode curl_formadd_file(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
 	const char * name, const char * path, const char * type) {
-		return type ? curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-						CURLFORM_CONTENTTYPE, type, CURLFORM_FILE, path, CURLFORM_END) :
-						curl_formadd(firstitem, lastitem, CURLFORM_COPYNAME, name,
-						CURLFORM_FILE, path, CURLFORM_END);
+		return type ?
+			curl_formadd(firstitem, lastitem,
+						   CURLFORM_COPYNAME, name,
+						   CURLFORM_CONTENTTYPE, type,
+						   CURLFORM_FILE, path,
+						   CURLFORM_END)
+			:
+			curl_formadd(firstitem, lastitem,
+							CURLFORM_COPYNAME, name,
+							CURLFORM_FILE, path,
+							CURLFORM_END);
 }
 
 extern inline CURLcode curl_form_post(CURL * handle, struct curl_httppost * post) {
