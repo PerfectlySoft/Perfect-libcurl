@@ -19,62 +19,62 @@ CURLoption CURLOPT_READDATA = CURLOPT_INFILE;
 
 typedef size_t (*curl_func)(void * ptr, size_t size, size_t num, void * ud);
 
-extern inline CURLcode curl_easy_setopt_long(CURL *handle, CURLoption option, long value)
+static CURLcode curl_easy_setopt_long(CURL *handle, CURLoption option, long value)
 {
 	return curl_easy_setopt(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_setopt_cstr(CURL *handle, CURLoption option, const char * value)
+static CURLcode curl_easy_setopt_cstr(CURL *handle, CURLoption option, const char * value)
 {
 	return curl_easy_setopt(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_setopt_int64(CURL *handle, CURLoption option, long long value)
+static CURLcode curl_easy_setopt_int64(CURL *handle, CURLoption option, long long value)
 {
 	return curl_easy_setopt(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_setopt_slist(CURL *handle, CURLoption option, struct curl_slist * value)
+static CURLcode curl_easy_setopt_slist(CURL *handle, CURLoption option, struct curl_slist * value)
 {
 	return curl_easy_setopt(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_setopt_void(CURL *handle, CURLoption option, void * value)
+static CURLcode curl_easy_setopt_void(CURL *handle, CURLoption option, void * value)
 {
 	return curl_easy_setopt(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_setopt_func(CURL *handle, CURLoption option, curl_func value)
+static CURLcode curl_easy_setopt_func(CURL *handle, CURLoption option, curl_func value)
 {
 	return curl_easy_setopt(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_getinfo_long(CURL *handle, CURLINFO option, long * value)
+static CURLcode curl_easy_getinfo_long(CURL *handle, CURLINFO option, long * value)
 {
 	return curl_easy_getinfo(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_getinfo_cstr(CURL *handle, CURLINFO option, const char ** value)
+static CURLcode curl_easy_getinfo_cstr(CURL *handle, CURLINFO option, const char ** value)
 {
 	return curl_easy_getinfo(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_getinfo_double(CURL *handle, CURLINFO option, double * value)
+static CURLcode curl_easy_getinfo_double(CURL *handle, CURLINFO option, double * value)
 {
 	return curl_easy_getinfo(handle, option, value);
 }
 
-extern inline CURLcode curl_easy_getinfo_slist(CURL *handle, CURLINFO option, struct curl_slist ** value)
+static CURLcode curl_easy_getinfo_slist(CURL *handle, CURLINFO option, struct curl_slist ** value)
 {
 	return curl_easy_getinfo(handle, option, value);
 }
 
-extern inline CURLcode curl_get_msg_result(CURLMsg * msg)
+static CURLcode curl_get_msg_result(CURLMsg * msg)
 {
 	return msg->data.result;
 }
 
-extern inline CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
+static CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
 	const char * name, const char * content, const long size, const char * type) {
 		return type ?
 			curl_formadd(firstitem, lastitem,
@@ -91,7 +91,7 @@ extern inline CURLFORMcode curl_formadd_content(struct curl_httppost **firstitem
 							CURLFORM_END);
 }
 
-extern inline CURLFORMcode curl_formadd_file(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
+static CURLFORMcode curl_formadd_file(struct curl_httppost **firstitem, struct curl_httppost **lastitem,
 	const char * name, const char * path, const char * type) {
 		return type ?
 			curl_formadd(firstitem, lastitem,
@@ -106,7 +106,7 @@ extern inline CURLFORMcode curl_formadd_file(struct curl_httppost **firstitem, s
 							CURLFORM_END);
 }
 
-extern inline CURLcode curl_form_post(CURL * handle, struct curl_httppost * post) {
+static CURLcode curl_form_post(CURL * handle, struct curl_httppost * post) {
 	return curl_easy_setopt(handle, CURLOPT_HTTPPOST, post);
 }
 
