@@ -1,3 +1,4 @@
+// swift-tools-version:4.0
 //
 //  Package.swift
 //  cURL
@@ -22,5 +23,5 @@ import PackageDescription
 let package = Package(
 	name: "cURL",
 	pkgConfig: "libcurl",
-	providers: [.Brew("curl"), .Apt("libcurl4-openssl-dev")]
+	providers: [.brew(["curl"]), .apt(["libcurl4-openssl-dev"])]
 )
